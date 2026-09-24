@@ -28,3 +28,7 @@ jobs:
 
       - name: Kör integrationstester
         run: ./mvnw -B test -Dtest='*IntegrationTest'
+
+      - name: Deploya till Render
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
