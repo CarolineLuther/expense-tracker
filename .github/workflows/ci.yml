@@ -20,5 +20,11 @@ jobs:
           java-version: 21
           cache: maven
 
-      - name: Bygg och testa
-        run: ./mvnw -B verify
+      - name: Bygg
+        run: ./mvnw -B -DskipTests package
+
+      - name: Kör enhetstester
+        run: ./mvnw -B test -Dtest='*ServiceTest'
+
+      - name: Kör integrationstester
+        run: ./mvnw -B test -Dtest='*IntegrationTest'
